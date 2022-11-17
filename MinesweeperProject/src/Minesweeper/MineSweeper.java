@@ -14,7 +14,6 @@ public class MineSweeper {
 		//1-8 = number of mines around tile
 		
 				
-	// char 2d Arrays 
 		public static void main(String[] args) {
 		
 			
@@ -156,7 +155,7 @@ public class MineSweeper {
 	                // for each time a mine occupies a nearby tile
 	                if(fieldHidden[r][c]!=9)
 	                {
-	                	// If the row isn't row 0, it's safe to change left and upper left
+	                	
 	                    if(r!=0)
 	                    {
 	                        if(fieldHidden[r-1][c]==9) count++; // left
@@ -176,7 +175,7 @@ public class MineSweeper {
 	                            if(fieldHidden[r+1][c+1]==9) count++; // bottom right
 	                        }
 	                    }
-	                    // If column isn't column 
+	                    
 	                    if(c!=0)
 	                    {
 	                        if(fieldHidden[r][c-1]==9) count++; // top
@@ -200,79 +199,6 @@ public class MineSweeper {
 	        }
 
 	    }
-		
-		// Build the rest of the field, and setting numbers for tiles alongside mines
-		public static void totalMinefiel() {
-			// Build our hidden 2D array, which has the mines and numbers 
-			//and is concealed from the user
-			for(int r=0; r<10; r++) {
-	            for(int c=0; c<10; c++) {
-	            	// Set initial count to 0
-	                int count = 0;
-	                
-	                // If the coordinate is not equal to 9, it is therefore not a mine.
-	                // We will check its neighbours. So if it does not equal
-	                // 9, we will check the surrounding tiles and increase count by 1
-	                // for each time a mine occupies a nearby tile
-	                
-	                 
-	                if(fieldHidden[r][c]!= 9 ) {
-	                	// And the neighbours
-	                	// If tile is not at point 0 or 9 (corners, or sides) so in the middle, check every tile around it
-	                	if((r != 0 && r!= 9) && (c !=0  && c !=9))
-	                		if(fieldHidden[r-1][c-1] == 9) count++; // top left corner
-	                		if(fieldHidden[r][c-1] == 9) count++; // top
-	                		if(fieldHidden[r+1][c-1] == 9) count ++; // top right
-	                		if(fieldHidden[r-1][c] ==9) count++; // left
-	                		if(fieldHidden[r+1][c] ==9) count++; // right
-	                		if(fieldHidden[r-1][c+1] ==9) count++; // bottom left
-	                		if(fieldHidden[r][c+1] ==9) count++;	//bottom
-	                		if(fieldHidden[r+1][c+1] ==9) count++; // bottom right
-	                		// If tile is top left corner
-	                } else if((r == 0) && (c == 0)) {
-	                	if(fieldHidden[r+1][c] ==9) count++; // right
-	                	if(fieldHidden[r][c+1] ==9) count++;	//bottom
-	            		if(fieldHidden[r+1][c+1] ==9) count++; // bottom right
-	            		// If tile is top right corner
-	                } else if((r==0) && (c==9)) {
-	                	if(fieldHidden[r-1][c] ==9) count++; // left
-	                	if(fieldHidden[r-1][c+1] ==9) count++; // bottom left
-	            		if(fieldHidden[r][c+1] ==9) count++;	//bottom
-	            		// If tile is bottom right corner
-	                } else if((r ==9) && (c==9)) {
-	                	if(fieldHidden[r-1][c-1] == 9) count++; // top left corner
-	            		if(fieldHidden[r][c-1] == 9) count++; // top
-	            		if(fieldHidden[r-1][c] ==9) count++; // left
-	            		// If tile is bottom left corner
-	                } else if ((r==9) && (c==0)) {
-	                	if(fieldHidden[r][c-1] == 9) count++; // top
-	            		if(fieldHidden[r+1][c-1] == 9) count ++; // top right
-	            		if(fieldHidden[r+1][c] ==9) count++; // right
-	                } else if(r == 0) {
-	                	if(fieldHidden[r-1][c] ==9) count++; // left
-	            		if(fieldHidden[r+1][c] ==9) count++; // right
-	            		if(fieldHidden[r-1][c+1] ==9) count++; // bottom left
-	            		if(fieldHidden[r][c+1] ==9) count++;	//bottom
-	            		if(fieldHidden[r+1][c+1] ==9) count++; // bottom right
-	                } else if(r==9) {
-	                	if(fieldHidden[r-1][c-1] == 9) count++; // top left corner
-	            		if(fieldHidden[r][c-1] == 9) count++; // top
-	            		if(fieldHidden[r+1][c-1] == 9) count ++; // top right
-	            		if(fieldHidden[r-1][c] ==9) count++; // left
-	            		if(fieldHidden[r+1][c] ==9) count++; // right
-	                } 
-	                
-	                
-	                fieldHidden[r][c] = (char)count;
-	            
-	            }
-	        }
-		}
-		
-		
-		
-
-		
 		
 
 		// Player input
@@ -326,7 +252,6 @@ public class MineSweeper {
 	        return true;
 	        
 	    }
-		
 		
 
 }
