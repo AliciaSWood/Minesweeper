@@ -25,7 +25,7 @@ public class MineSweeper {
 			totalMinefield();
 			
 			// If uncommented, will reveal the minefield for testing
-			printIntGrid(fieldHidden);
+//			printIntGrid(fieldHidden);
 			
 			//This method sets the visual array to be filled with 'X'
 			visualArray(fieldDisplayed);
@@ -216,10 +216,10 @@ public class MineSweeper {
 			int turnCount = 1;
 	        Scanner player= new Scanner(System.in);
 	        // Ask user for row number, store in 'row'
-	        System.out.print("\nRow Number (0-9): ");
+	        System.out.print("\nEnter Row Number (0-9): ");
 	        int row = player.nextInt();
 	        // Ask user for column number, store in 'column'
-	        System.out.print("Column Number (0-9): ");
+	        System.out.print("Enter Column Number (0-9): ");
 	        int column = player.nextInt();
 
 	        // Check user puts in numbers between 0-9, if not tell them they need to
