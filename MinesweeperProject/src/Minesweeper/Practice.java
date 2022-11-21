@@ -3,7 +3,7 @@ package Minesweeper;
 import java.util.Random;
 import java.util.Scanner;
 
-public class MineSweeper {
+public class Practice {
 	// Created two 2D arrays, each with 10 rows and 10 columns
 		private static char[][] fieldDisplayed = new char[10][10];
 		private static int [][]  fieldHidden = new int[10][10];
@@ -16,7 +16,6 @@ public class MineSweeper {
 				
 		public static void main(String[] args) {
 		
-			
 			
 			
 			// Set up hidden minefield
@@ -34,7 +33,9 @@ public class MineSweeper {
 			// Prints 'MineSweeper' and the minefield for the user to see
 			newGame();
 			
-
+			// A count that, once the amount of turns user has made is 90 ()so all tiles revealed except for 10 mines of the 100 tile grid),
+			//prints that player has won
+			int turnCount = 0;
 			
 			// A boolean that checks if player has hit a mine(returns false, and game is over) or true (which prompts the player to go again)
 			boolean checkPlayer = false;
@@ -44,15 +45,19 @@ public class MineSweeper {
 				// Checks if player has set off mine
 				checkPlayer = playerInput();
 				
-
-				
+				turnCount++;
 			} 
 			
 			System.out.println("Game Over");
 			
+			if(turnCount ==90) {
+				System.out.println("Congratulations, you won!");
+			}
+			
+			
 			
 		}
-		
+		// 90 guesses = win
 		
 		public static void newGame() {
 			System.out.println("\t  Minesweeper\n");
@@ -124,7 +129,7 @@ public class MineSweeper {
 				// from this random number generators sequence (0-9)
 				int r = random.nextInt(10);
 				int c = random.nextInt(10);
-
+//				System.out.println("Mine Number: " + MineNumber +  " row: " + r + " column: " + c);
 				// Assign value of 9 to each Mine
 				fieldHidden[r][c] = 9;
 				// Increase count by 1 each time, so no infinite loop
@@ -136,71 +141,72 @@ public class MineSweeper {
 		}
 		
 		// Build the rest of the field, and setting numbers for tiles alongside mines
-		
-			public static void totalMinefield()
-		    {
-				// Consider column as y axis, row as x axis (logically should be other way around, but easier to visualise this way)
-		        for(int column=0; column<10; column++)
-		        {
-		            for(int row=0; row<10; row++)
-		            {
-		                int count=0;
-		                // If the coordinate is not equal to 9, it is therefore not a mine.
-		                // We will check its neighbours. So if it does not equal
-		                // 9, we will check the surrounding tiles and increase count by 1
-		                // for each time a mine occupies a nearby tile
-		                
-		                if(fieldHidden[column][row]!=9)
-		                {
-		                	// If column isn't 0, there will be a tile above that we can check for mine
-		                    if(column!=0)
-		                    {
-		                        if(fieldHidden[column-1][row]==9) count++;   //Top
-		                        // If row isn't 0, we can go top left
-		                        if(row!=0)
-		                        {
-		                            if(fieldHidden[column-1][row-1]==9) count++;  // Top left
-		                        }
+	
+		public static void totalMinefield()
+	    {
+			// Consider column as y axis, row as x axis (logically should be other way around, but gets confusing quickly)
+	        for(int column=0; column<10; column++)
+	        {
+	            for(int row=0; row<10; row++)
+	            {
+	                int count=0;
+	                // If the coordinate is not equal to 9, it is therefore not a mine.
+	                // We will check its neighbours. So if it does not equal
+	                // 9, we will check the surrounding tiles and increase count by 1
+	                // for each time a mine occupies a nearby tile
+	                
+	                if(fieldHidden[column][row]!=9)
+	                {
+	                	// If column isn't 0, there will be a tile above that we can check for mine
+	                    if(column!=0)
+	                    {
+	                        if(fieldHidden[column-1][row]==9) count++;   //Top
+	                        // If row isn't 0, we can go top left
+	                        if(row!=0)
+	                        {
+	                            if(fieldHidden[column-1][row-1]==9) count++;  // Top left
+	                        }
 
-		                    }
-		                    // If column isn't 9, we can check bottom tile
-		                    if(column!=9)
-		                    {
-		                        if(fieldHidden[column+1][row]==9) count++;  // Bottom
-		                        // If row also isn't 9, we can check bottom right
-		                        if(row!=9)
-		                        {
-		                            if(fieldHidden[column+1][row+1]==9) count++; // Bottom right
-		                        }
-		                    }
-		                    //If row isn't 0, we can check left tile
-		                    if(row!=0)
-		                    {
-		                        if(fieldHidden[column][row-1]==9) count++; // Left
-		                        // If column also isn't 9, we can check bottom left
-		                        if(column!=9)
-		                        {
-		                            if(fieldHidden[column+1][row-1]==9) count++;  // Bottom Left
-		                        }
-		                    }
-		                    // If row isn't 9
-		                    if(row!=9)
-		                    {
-		                    	// We can access right tile
-		                        if(fieldHidden[column][row+1]==9) count++;
-		                        // If column also isn't 0, we can can check top right tile
-		                        if(column!=0)
-		                        {
-		                            if(fieldHidden[column-1][row+1]==9) count++; // Top Right
-		                        }
-		                    }
+	                    }
+	                    // If column isn't 9, we can check bottom tile
+	                    if(column!=9)
+	                    {
+	                        if(fieldHidden[column+1][row]==9) count++;  // Bottom
+	                        // If row also isn't 9, we can check bottom right
+	                        if(row!=9)
+	                        {
+	                            if(fieldHidden[column+1][row+1]==9) count++; // Bottom right
+	                        }
+	                    }
+	                    //If row isn't 0, we can check left tile
+	                    if(row!=0)
+	                    {
+	                        if(fieldHidden[column][row-1]==9) count++; // Left
+	                        // If column also isn't 9, we can check bottom left
+	                        if(column!=9)
+	                        {
+	                            if(fieldHidden[column+1][row-1]==9) count++;  // Bottom Left
+	                        }
+	                    }
+	                    // If row isn't 9
+	                    if(row!=9)
+	                    {
+	                    	// We can access right tile
+	                        if(fieldHidden[column][row+1]==9) count++;
+	                        // If column also isn't 0, we can can check top right tile
+	                        if(column!=0)
+	                        {
+	                            if(fieldHidden[column-1][row+1]==9) count++; // Top Right
+	                        }
+	                    }
 
-		                    fieldHidden[column][row] = count;
-		                }
-		            }
-		        }
+	                    fieldHidden[column][row] = count;
+	                }
+	            }
+	        }
 
-		    }
+	    }
+
 		
 
 		// Player input
@@ -213,7 +219,6 @@ public class MineSweeper {
 		
 		public static boolean  playerInput(){
 			printGrid(fieldDisplayed);
-			int turnCount = 1;
 	        Scanner player= new Scanner(System.in);
 	        // Ask user for row number, store in 'row'
 	        System.out.print("\nRow Number (0-9): ");
@@ -230,24 +235,17 @@ public class MineSweeper {
 	        }
 	        // If the row and column coordinate equals 9, they have chosen a mine. 
 	        // Print boom!
-	        
-	     // A count that, once the amount of turns user has made is 90 (all tiles revealed except for 10 mines of the 100 tile grid),
-	     //prints that player has won
-	     // 90 guesses = win
-	        if(turnCount ==90) {
-				System.out.println("Congratulations, you won!");
-				return false;
-	        
-	        }
 	        if(fieldHidden[row][column]==9)
 	        {
 	            System.out.println("boom!");
 	            
+//	            if(fieldHidden[row][column]==9) {
+//	            	fieldDisplayed[row][column] = 'O';
+//	            }
 	             return false;
 	            
 	        }
 	        else if(fieldHidden[row][column]==0) {
-
 	        	fieldDisplayed[row][column] = '0';
 	        }
 	        
@@ -256,9 +254,8 @@ public class MineSweeper {
 	        else {
 	        	// char array  =  (cast to char) int array
 	        	fieldDisplayed[row][column] =  (char)(fieldHidden[row][column] + '0');
-	        	turnCount++;
 	        }
-//	        System.out.println(turnCount);
+
 	        return true;
 	        
 	    }
